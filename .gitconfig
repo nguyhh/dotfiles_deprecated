@@ -1,0 +1,8 @@
+[user]
+	email = nguyenhaiha1224@gmail.com
+	name = Leena Hai Ha Nguyen
+[credential]
+	helper = store --file ~/.my-credentials
+[core]
+	editor = $EDITOR
+	pager = less -FX
