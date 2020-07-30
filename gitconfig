@@ -4,5 +4,40 @@
 [credential]
 	helper = store --file ~/.my-credentials
 [core]
-	editor = $EDITOR
-	pager = less -FX
+	commitGraph = true
+	editor = vim
+	pager = less -SFX
+[alias]
+ aa = add --all
+        adu = add -u
+        alias = config --get-regexp 'alias.*'
+        ba = branch -a
+        bd = branch -d
+        bD = branch -D
+        bdm = "!git branch --merged | grep -v '*' | xargs -n 1 git branch -d"
+        ci = commit -v
+        cia = commit --amend
+        co = checkout
+        cob = checkout -b
+        deletes = diff --diff-filter=D --name-only -z
+        ds = diff --staged
+        fp = fetch --all --prune
+        h = !git head
+        head = !git l -1
+        hp =  "!. ~/.githelpers && show_git_head"
+        incoming = log --oneline ..@{upstream}
+        l = "!. ~/.githelpers && pretty_git_log"
+        ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+        log1 = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
+        log2 = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''                 %C(white)%s%C(reset) %C(bold white)— %an%C(reset)' --abbrev-commit
+        master = checkout master
+        oldest-ancestor = !zsh -c 'diff --old-line-format='' --new-line-format='' <(git rev-list --first-parent "${1:-master}") <(git rev-list --first-parent "${2:-HEAD}") | head -1' -
+        outgoing = log --oneline @{upstream}..
+        release-notes = !git log --oneline --no-merges `git describe --abbrev=0 --tags`..HEAD | cut -c 9- | sort
+        plush = push --force-with-lease
+        serve = !git daemon --reuseaddr --verbose --base-path=. --export-all ./.git
+        st = status -sb # short, branch
+        sta = status
+        stu = status --untracked=no
+        unstage = reset HEAD
+        untracked-files = ls-files --others --exclude-standard
