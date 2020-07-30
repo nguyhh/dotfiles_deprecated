@@ -69,7 +69,10 @@ ZSH_THEME="avit"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git
-       	zsh-syntax-highlighting)
+	ruby
+	rails
+       	zsh-syntax-highlighting
+	zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -100,3 +103,7 @@ export EDITOR="vim"
 # Example aliases
  alias zshconfig="mate ~/.zshrc"
  alias ohmyzsh="mate ~/.oh-my-zsh"
+
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
