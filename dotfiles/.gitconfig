@@ -6,39 +6,46 @@
 [core]
 	commitGraph = true
 	editor = vim
-	pager = less -SFX
+	pager = less -SFX -x10
+[diff] 
+	algorithm = patience
 [alias]
+
 	aa = add --all
+	ac = !git add -A && git commit -m
 	adu = add -u
+	ba = branch -a
+	cane = commit --amend --no-edit
+	cia = commit --amend
+	cleanb = git fetch -p && for branch in $(git branch -vv | grep ': gone]' | awk '{print $1}'); do git branch -D $branch; done 
+	co = checkout
+	frp = !git fetch origin master && git rebase origin/master && git push origin +`git rev-parse --abbrev-ref HEAD`
+	fixup = "!git log -n 20 --pretty=format: '%h %s' --no-merges | fzf | cut -c -7 | xargs -o git commit --fixup"
+	h = !git head
+	latest = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+	pnew = !git push -u origin `git rev-parse --abbrev-ref HEAD`
+	serve = !git daemon --reuseaddr --verbose --base-path=. --export-all ./.git
         alias = config --get-regexp 'alias.*'
         ap = add -p
-	ba = branch -a
-        bd = branch -d
         bD = branch -D
+        bd = branch -d
         ci = commit -v
-        cia = commit --amend
-        clean-b = "!git branch -vv | grep "gone" | awk '{print $1}' |xargs git branch -D"
-	co = checkout
         cob = checkout -b
         deletes = diff --diff-filter=D --name-only -z
         ds = diff --staged
         fp = fetch --all --prune
-	frp = !git fetch origin master && git rebase origin/master && git push origin +`git rev-parse --abbrev-ref HEAD`
-	h = !git head
         head = !git l -1
         hp =  "!. ~/.githelpers && show_git_head"
         incoming = log --oneline ..@{upstream}
         l = "!. ~/.githelpers && pretty_git_log"
-        ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
         log1 = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
         log2 = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''                 %C(white)%s%C(reset) %C(bold white)— %an%C(reset)' --abbrev-commit
-	pnew = !git push -u origin `git rev-parse --abbrev-ref HEAD`
         master = checkout master
         oldest-ancestor = !zsh -c 'diff --old-line-format='' --new-line-format='' <(git rev-list --first-parent "${1:-master}") <(git rev-list --first-parent "${2:-HEAD}") | head -1' -
         outgoing = log --oneline @{upstream}..
-        release-notes = !git log --oneline --no-merges `git describe --abbrev=0 --tags`..HEAD | cut -c 9- | sort
         plush = push --force-with-lease
-	serve = !git daemon --reuseaddr --verbose --base-path=. --export-all ./.git
+        release-notes = !git log --oneline --no-merges `git describe --abbrev=0 --tags`..HEAD | cut -c 9- | sort
         st = status -sb # short, branch
         sta = status
         stu = status --untracked=no
