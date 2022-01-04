@@ -1,8 +1,6 @@
 [user]
 	email = nguyenhaiha1224@gmail.com
 	name = nguyhh
-[credential]
-	helper = store --file ~/.my-credentials
 [core]
 	commitGraph = true
 	editor = vim
