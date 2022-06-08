@@ -1,12 +1,9 @@
 [user]
-	email = nguyenhaiha1224@gmail.com
-	name = nguyhh
+	email = leena.nguyen@shopify.com
+	name = Leena Hai Ha Nguyen
 [core]
-	commitGraph = true
 	editor = vim
 	pager = less -SFX -x10
-[diff] 
-	algorithm = patience
 [alias]
 
 	aa = add --all
@@ -16,8 +13,9 @@
 	ba = branch -a
 	cane = commit --amend --no-edit
 	cia = commit --amend
-	cleanb = git fetch -p && for branch in $(git branch -vv | grep ': gone]' | awk '{print $1}'); do git branch -D $branch; done 
+	cleanb = "!git fetch -p && for branch in $(git branch -vv | grep ': gone]' | awk '{print $1}'); do git branch -D $branch; done" 
 	co = checkout
+	coo = "!git branch   | fzf | cut -c2- | xargs -o git checkout"
 	frp = !git fetch origin master && git rebase origin/master && git push origin +`git rev-parse --abbrev-ref HEAD`
 	fixup = "!git log -n 20 --pretty=format:'%h %s' --no-merges | fzf | cut -c -7 | xargs -o git commit --fixup"
 	h = !git head
@@ -54,3 +52,7 @@
         untracked-files = ls-files --others --exclude-standard
 [rebase]
 	autosquash = true
+[include]
+	path = /Users/leena/.config/dev/gitconfig
+[pull]
+	rebase = true
